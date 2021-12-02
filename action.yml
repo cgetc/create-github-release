@@ -1,4 +1,4 @@
-name: "Create Github release"
+name: "Create Github release simply"
 description: "Create Github release with curl"
 inputs:
   token:
