@@ -1,4 +1,4 @@
-# create-github-release
+# create-github-release-simply
 
 This action creates github release.
 Not required tag name.
@@ -48,7 +48,7 @@ generate release_notes or not. Default false.
 
 ## Example
 
-uses: cgetc/create-github-relrease@v0.1.0
+uses: cgetc/create-github-relrease-simply@v0.1.0
 with:
     token: ${{ secrets.GITHUB_TOKEN }}
     repository: ${{ github.repository }}
