@@ -1,0 +1,57 @@
+name: "Create Github release"
+description: "Create Github release with curl"
+inputs:
+  token:
+    description: "Github Token"
+    required: true
+  repository:
+    description: "The owner and repository name. For example, Codertocat/Hello-World."
+    required: true
+  name:
+    description: "release name"
+    required: true
+  body-path:
+    description: "path of release body text"
+    required: true
+  tag-name:
+    description: "release tag name"
+    required: false
+    default: ""
+  draft:
+    description: "draft or not"
+    required: false
+    default: "false"
+  prelesease:
+    description: "prerelease or not"
+    required: false
+    default: "false"
+  target-commitish:
+    description: "Specifies the commitish value that determines where the Git tag is created from. Can be any branch or commit SHA. Unused if the Git tag already exists. Default: the repository's default branch (usually master)."
+    required: false
+    default: ""
+  discussion-category-name:
+    description: "If specified, a discussion of the specified category is created and linked to the release. The value must be a category that already exists in the repository. "
+    required: false
+    default: ""
+  generate-release-notes:
+    description: "generate release_notes or not"
+    required: false
+    default: "false"
+
+runs:
+  using: "composite"
+  steps:
+    - name: create JSON
+      run: |
+        BODY=$(cat ${{ inputs.body-path }} | sed ':a;N;$!ba;s/\n/\\n/g')
+        echo "{\"name\": \"${{ inputs.name }}\", \"body\": \"${BODY}\", \"tag_name\": \"${{ inputs.tag-name }}\", \"draft\": ${{ inputs.draft }}, \"prerelease\": ${{ inputs.prelesease }}, \"target_commitish\": \"${{ inputs.target-name }}\", \"discussion_category_name\": \"${{ inputs.discussion-category-name }}\", \"generate_release_notes\": ${{ inputs.generate-release-notes }}}" > /tmp/data.json
+      shell: bash
+    - name: post rest api
+      run: |
+        URL=https://api.github.com/repos/${{ inputs.repository }}/releases
+        curl -f -X POST -d @/tmp/data.json -H "Authorization: token ${{ inputs.token }}" ${URL}
+      shell: bash
+
+branding:
+  icon: "git-branch"
+  color: "green"
