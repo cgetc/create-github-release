@@ -1,4 +1,4 @@
-name: Test copy release
+name: Test create release
 on:
   push:
 jobs:
