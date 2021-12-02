@@ -49,7 +49,7 @@ generate release_notes or not. Default false.
 ## Example
 
 ```yml
-uses: cgetc/create-github-relrease-simply@v0.1.0
+uses: cgetc/create-github-release-simply@v0.1.0
 with:
     token: ${{ secrets.GITHUB_TOKEN }}
     repository: ${{ github.repository }}
