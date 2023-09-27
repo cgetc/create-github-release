@@ -44,7 +44,7 @@ runs:
     - name: create JSON
       run: |
         BODY=$(cat ${{ inputs.body-path }} | sed ':a;N;$!ba;s/\n/\\n/g')
-        echo "{\"name\": \"${{ inputs.name }}\", \"body\": \"${BODY}\", \"tag_name\": \"${{ inputs.tag-name }}\", \"draft\": ${{ inputs.draft }}, \"prerelease\": ${{ inputs.prelesease }}, \"target_commitish\": \"${{ inputs.target-name }}\", \"discussion_category_name\": \"${{ inputs.discussion-category-name }}\", \"generate_release_notes\": ${{ inputs.generate-release-notes }}}" > /tmp/data.json
+        echo "{\"name\": \"${{ inputs.name }}\", \"body\": \"${BODY}\", \"tag_name\": \"${{ inputs.tag-name }}\", \"draft\": ${{ inputs.draft }}, \"prerelease\": ${{ inputs.prelesease }}, \"target_commitish\": \"${{ inputs.target-commitish }}\", \"discussion_category_name\": \"${{ inputs.discussion-category-name }}\", \"generate_release_notes\": ${{ inputs.generate-release-notes }}}" > /tmp/data.json
       shell: bash
     - name: post rest api
       run: |
