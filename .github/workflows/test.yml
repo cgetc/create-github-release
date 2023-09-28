@@ -21,4 +21,5 @@ jobs:
           repository: ${{ github.repository }}
           name: v0.1.0
           body-path: /tmp/release_body.txt
+          target-commitish: test
           draft: true
